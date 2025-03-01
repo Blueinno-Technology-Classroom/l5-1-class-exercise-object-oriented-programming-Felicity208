@@ -47,28 +47,55 @@ class BankAccount:
         self.balance += amount
 
     def withdraw(self, amount):
-        self.balance -= amount
+        if (self.balance - amount) >= 0:
+            self.balance -= amount
+            if (self.balance -2) < 0:
+                self.balance = self.balance
+            else: 
+                self.balance -= 2
+        else:
+            self.balance = 0
 
-account = BankAccount("Silver", "100")
+    def transfer(self, name2, amount):
+        transfer_fee = 5
+        if amount > 0:
+            if self.name != name2:
+                if (self.balance - amount - transfer_fee) > 0:
+                    self.balance -= (amount + transfer_fee)
+                    name2.balance += amount
+                else:
+                    print("Not enough balance")
+
+
+
+            
+
+
+
+
+account = BankAccount("Silver", 100)
 print(account.name, account.balance)
 
 ##################################################
 '''
 Q5:
 '''
-account.deposit(50, 100)
-print(account.name, account.amount, account.balance)
-
+account.deposit(100)
+print(account.name, account.balance)
 ##################################################
 '''
 Q6:
 '''
-
-
+account.withdraw(90)
+print(account.name, account.balance)
 ##################################################
 '''
 Q7:
 '''
+secondAcc = BankAccount("Star", 300)
+secondAcc.transfer(account, 300)
 
 
+print(secondAcc.name, secondAcc.balance)
+print(account.name, account.balance)
 ##################################################
